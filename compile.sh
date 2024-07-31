@@ -6,8 +6,9 @@ BUILD_DIR="build"
 PROJECT_NAME="GameOfLife"
 
 if [ -d "$BUILD_DIR" ]; then
-    echo -e "\t$BUILD_DIR directory already created. Changing into the directory.\n"
+    echo -e "\t$BUILD_DIR directory already created. Changing into the directory.\n" 
     cd "$BUILD_DIR"
+    make clean
 else
     echo -e "\t$BUILD_DIR directory not created. Creating directory.\n"
     mkdir "$BUILD_DIR"
