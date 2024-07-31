@@ -9,6 +9,7 @@ file(GLOB SOURCE_FILES
     "src/*.cpp"
     "src/machine/*.cpp"
     "src/models/*.cpp"
+    "src/states/*.cpp"
 )
 file(GLOB HEADER_FILES "include/*.hpp")
 
