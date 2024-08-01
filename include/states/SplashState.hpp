@@ -22,5 +22,7 @@ namespace GameOfLife{
             GameDataRef data;
             sf::Sprite background;
             sf::Texture backgroundTexture;
+
+            void HandleKeyboardInput(sf::Keyboard::Key key);
     };
 }
