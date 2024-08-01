@@ -18,10 +18,22 @@ namespace GameOfLife {
                 case sf::Event::Closed:
                     this->data->window.close();
                     break;
+                case sf::Event::KeyPressed:
+                    this->HandleKeyboardInput(event.key.code);
+                    break;
                 default:
                     break;
             }
         }
+    }
+
+    void SplashState::HandleKeyboardInput(sf::Keyboard::Key key){
+        switch (key) {
+            case sf::Keyboard::Q:
+                this->data->window.close();
+            default:
+                break;
+        } 
     }
 
     void SplashState::Update(float dt){}
