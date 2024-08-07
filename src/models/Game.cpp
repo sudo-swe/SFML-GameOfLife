@@ -6,7 +6,8 @@
 #include <string>
 
 namespace GameOfLife {
-    Game::Game(int width, int height, std::string title){
+    Game::Game(int width, int height, std::string title)
+    {
         srand(time(NULL));
         this->data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
         this->data->machine.AddState(StateRef(new SplashState(this->data)));

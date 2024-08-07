@@ -1,13 +1,13 @@
+
 #include "models/Board.hpp"
 #include "models/Cell.hpp"
 #include <vector>
 
 namespace GameOfLife {
-    Board::Board(int rows, int columns){
-        this->rows = rows;
-        this->columns = columns;
+    Board::Board(int rows, int columns)
+        : rows(rows) , columns(columns)
+    {
         this->grid.resize(this->rows);
-        
         for(int i=0; i<this->rows; i++){
             this->grid[i].resize(this->columns);
             for(int j=0; j<this->columns; j++){

@@ -1,6 +1,9 @@
 #include "states/SplashState.hpp"
 #include "DEFINITIONS.hpp"
+#include "machine/StateMachine.hpp"
 #include "models/Game.hpp"
+#include "states/GameState.hpp"
+#include <ctime>
 
 namespace GameOfLife {
     SplashState::SplashState(GameDataRef data) : data(data){}
@@ -36,7 +39,11 @@ namespace GameOfLife {
         } 
     }
 
-    void SplashState::Update(float dt){}
+    void SplashState::Update(float dt){
+        if(this->clock.getElapsedTime().asSeconds() > SPLASHSTATE_DELAY_SECONDS){
+            this->data->machine.AddState(StateRef(new GameState(data)));
+        }
+    }
 
     void SplashState::Draw(float dt){
         this->data->window.clear();

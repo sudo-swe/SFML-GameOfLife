@@ -1,6 +1,8 @@
 #pragma once
 
+#include "DEFINITIONS.hpp"
 #include "machine/StateMachine.hpp"
+#include "models/Board.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -12,6 +14,9 @@ namespace GameOfLife {
     struct GameData{
         StateMachine machine;
         sf::RenderWindow window;
+        Board board;
+
+        GameData(int rows, int columns) : board(rows, columns){}
     };
 
     typedef std::shared_ptr<GameData> GameDataRef;
@@ -23,7 +28,7 @@ namespace GameOfLife {
         private:
             const float dt = 1.0/60.0f;
             sf::Clock clock;
-            GameDataRef data = std::make_shared<GameData>();
+            GameDataRef data = std::make_shared<GameData>(BOARD_ROWS, BOARD_COLUMNS);
 
             void Run();
     };

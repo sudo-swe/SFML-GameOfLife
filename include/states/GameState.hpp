@@ -1,17 +1,10 @@
 #pragma once
 
-#include "machine/State.hpp"
 #include "models/Game.hpp"
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-
-
-namespace GameOfLife{ 
-    class SplashState : public State{
-        public:
-            SplashState(GameDataRef data);
+namespace GameOfLife {
+    class GameState : public State {
+        public: 
+            GameState(GameDataRef data);
 
             void Init();
             void HandleInput();
@@ -20,10 +13,10 @@ namespace GameOfLife{
 
         private:
             GameDataRef data;
-            sf::Clock clock;
             sf::Sprite background;
             sf::Texture backgroundTexture;
 
             void HandleKeyboardInput(sf::Keyboard::Key key);
+            void DrawBoard();
     };
 }
