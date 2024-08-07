@@ -13,10 +13,12 @@ namespace GameOfLife {
 
         private:
             GameDataRef data;
+            sf::Clock clock;
             sf::Sprite background;
             sf::Texture backgroundTexture;
 
             void HandleKeyboardInput(sf::Keyboard::Key key);
+            void HandleMouseInput(sf::Mouse::Button button);
             void DrawBoard();
     };
 }

@@ -27,4 +27,24 @@ namespace GameOfLife {
     Cell &Board::GetCellAt(int row, int column){
         return this->grid[row][column];
     }
+
+    void Board::Update(){
+        for(int i=0; i<this->rows; i++){
+            for(int j=0; j<this->columns; j++){
+                this->GetCellAt(i, j).Update();
+            }
+        }
+    }
+
+    void Board::ToggleCellAt(sf::Vector2f mousePos){
+        for(int i=0; i<this->rows; i++){
+            for(int j=0; j<this->columns; j++){
+                Cell &cell = this->GetCellAt(i, j);
+                if(cell.GetDrawableCell().getGlobalBounds().contains(mousePos)){
+                    if(cell.IsAlive()) cell.SetCellState(Cell::ALIVE_TO_DEAD);
+                    else cell.SetCellState(Cell::DEAD_TO_ALIVE);
+                }
+            }
+        }
+    }
 }
