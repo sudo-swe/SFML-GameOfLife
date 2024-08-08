@@ -1,6 +1,8 @@
 
 #include "models/Board.hpp"
 #include "models/Cell.hpp"
+#include "DEFINITIONS.hpp"
+#include <SFML/Graphics/Rect.hpp>
 #include <vector>
 
 namespace GameOfLife {
@@ -40,9 +42,12 @@ namespace GameOfLife {
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
                 Cell &cell = this->GetCellAt(i, j);
-                if(cell.GetDrawableCell().getGlobalBounds().contains(mousePos)){
-                    if(cell.IsAlive()) cell.SetCellState(Cell::ALIVE_TO_DEAD);
-                    else cell.SetCellState(Cell::DEAD_TO_ALIVE);
+                sf::FloatRect cellRect = cell.GetDrawableCell().getGlobalBounds();
+                cellRect.width -= 2*CELL_OUTLINE_THICKNESS; 
+                cellRect.height -= 2*CELL_OUTLINE_THICKNESS;
+                if(cellRect.contains(mousePos)){
+                    if(cell.IsAlive()) cell.SetCellState(Cell::DEAD);
+                    else cell.SetCellState(Cell::ALIVE);
                 }
             }
         }

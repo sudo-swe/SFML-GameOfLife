@@ -1,6 +1,7 @@
 #include "states/GameState.hpp"
 #include "DEFINITIONS.hpp"
 #include "models/Game.hpp"
+#include <SFML/System/Vector2.hpp>
 #include <iostream>
 
 namespace GameOfLife {
@@ -34,10 +35,7 @@ namespace GameOfLife {
     }
 
     void GameState::Update(float dt){
-        if(this->clock.getElapsedTime().asSeconds() > 2.0f){
-            this->clock.restart();
-            this->data->board.Update();
-        }
+        this->data->board.Update();
     }
 
     void GameState::Draw(float dt){
@@ -60,7 +58,8 @@ namespace GameOfLife {
             case sf::Mouse::Left:
                 {
                     sf::Vector2i mousePos = sf::Mouse::getPosition(this->data->window);
-                    this->data->board.ToggleCellAt(this->data->window.mapPixelToCoords(mousePos));
+                    sf::Vector2f mousePosF = this->data->window.mapPixelToCoords(mousePos);
+                    this->data->board.ToggleCellAt(mousePosF);
                 }
                 break;
             default:
