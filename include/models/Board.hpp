@@ -13,9 +13,12 @@ namespace GameOfLife{
             Cell &GetCellAt(int row, int column);
             void ToggleCellAt(sf::Vector2f mousePos);
             void Update();
+            void ProcessGeneration();
 
         private:
            int rows, columns;
            std::vector<std::vector<Cell>> grid;
+
+           int GetNumOfLiveNeighbors(int row, int column);
     };
 }
