@@ -22,7 +22,6 @@ namespace GameOfLife{
             GameDataRef data;
             sf::Clock clock;
             sf::Sprite background;
-            sf::Texture backgroundTexture;
 
             void HandleKeyboardInput(sf::Keyboard::Key key);
     };

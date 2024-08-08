@@ -1,8 +1,9 @@
 #pragma once
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
+#include <map>
 #include <string>
 
 
@@ -12,18 +13,13 @@ namespace GameOfLife {
             AssetManager(){}
             ~AssetManager(){}
 
-            void LoadTexture(std::string name, std::string filename);
-            sf::Texture &GetTexture(std::string name);
-            void LoadFont(std::string name, std::string filename);
+            void LoadFont(std::string name, std::string filePath);
             sf::Font &GetFont(std::string name);
-            void LoadSoundBuffer(std::string name, std::string filename);
-            sf::SoundBuffer &GetSoundBuffer(std::string name);
-
-            void ClearSounds();
+            void LoadTexture(std::string name, std::string filePath);
+            sf::Texture &GetTexture(std::string name);
 
         private:
-            std::map<std::string, sf::Texture> textures;
             std::map<std::string, sf::Font> fonts;
-            std::map<std::string, sf::SoundBuffer> sounds;
+            std::map<std::string, sf::Texture> textures;
     };
 }
