@@ -2,6 +2,7 @@
 
 #include "DEFINITIONS.hpp"
 #include "machine/StateMachine.hpp"
+#include "managers/AssetManager.hpp"
 #include "models/Board.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -14,6 +15,7 @@ namespace GameOfLife {
     struct GameData{
         StateMachine machine;
         sf::RenderWindow window;
+        AssetManager assets;
         Board board;
 
         GameData(int rows, int columns) : board(rows, columns){}

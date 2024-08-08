@@ -9,8 +9,8 @@ namespace GameOfLife {
     SplashState::SplashState(GameDataRef data) : data(data){}
 
     void SplashState::Init(){
-        this->backgroundTexture.loadFromFile(PATH_SPLASH_BACKGROUND);
-        this->background.setTexture(this->backgroundTexture);
+        this->data->assets.LoadTexture("SplashState Background", PATH_SPLASH_BACKGROUND);
+        this->background.setTexture(this->data->assets.GetTexture("SplashState Background"));
     }
 
     void SplashState::HandleInput(){

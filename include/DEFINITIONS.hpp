@@ -5,6 +5,7 @@
 
 #define GAME_TITLE "Conway's Game Of Life"
 
+#define PATH_MOULDY_FONT "../assets/fonts/MouldyCheeseRegular.ttf"
 #define PATH_SPLASH_BACKGROUND "../assets/res/SplashBackground.png"
 #define SPLASHSTATE_DELAY_SECONDS 1.0f
 
@@ -12,7 +13,7 @@
 #define BOARD_COLUMNS 50
 #define BOARD_MARGIN 50.0f
 
-#define GENERATION_DELAY_SECONDS 1.0f
+#define GENERATION_DELAY_SECONDS 0.2f
 
 #define CELL_WIDTH (SCREEN_WIDTH-(2*BOARD_MARGIN))/BOARD_ROWS
 #define CELL_HEIGHT (SCREEN_HEIGHT-(2*BOARD_MARGIN))/BOARD_COLUMNS

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "models/Game.hpp"
+#include <SFML/Graphics/Text.hpp>
 namespace GameOfLife {
     class GameState : public State {
         public: 
@@ -14,9 +15,12 @@ namespace GameOfLife {
         private:
             GameDataRef data;
             sf::Clock clock;
-            sf::Sprite background;
-            sf::Texture backgroundTexture;
-            bool paused = false;
+            sf::Text generationsText;
+            sf::Text pausedText;
+
+            bool paused = true;
+            long generations = 0;
+
 
             void HandleKeyboardInput(sf::Keyboard::Key key);
             void HandleMouseInput(sf::Mouse::Button button);
