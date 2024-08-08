@@ -1,19 +1,14 @@
 #include "states/GameState.hpp"
-#include "DEFINITIONS.hpp"
 #include "models/Game.hpp"
+#include "DEFINITIONS.hpp"
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
+#include <SFML/Window/Keyboard.hpp>
 
 namespace GameOfLife {
     GameState::GameState(GameDataRef data) :
-        data(data)
-    {
+        data(data) {}
 
-    }
-
-    void GameState::Init(){
-
-    }
+    void GameState::Init(){}
 
     void GameState::HandleInput(){
         sf::Event event;
@@ -28,6 +23,7 @@ namespace GameOfLife {
                     break;
                 case sf::Event::MouseButtonPressed:
                     this->HandleMouseInput(event.mouseButton.button);
+                    break;
                 default:
                     break;
             }
@@ -35,7 +31,15 @@ namespace GameOfLife {
     }
 
     void GameState::Update(float dt){
-        this->data->board.Update();
+        if(this->paused) this->data->board.Update();
+        else if (this->clock.getElapsedTime().asSeconds() > GENERATION_DELAY_SECONDS){
+           this->clock.restart();
+           this->data->board.ProcessGeneration();
+        }
+    }
+
+    void GameState::TogglePause(){ 
+        this->paused = !this->paused;
     }
 
     void GameState::Draw(float dt){
@@ -48,6 +52,10 @@ namespace GameOfLife {
         switch (key) {
             case sf::Keyboard::Q:
                 this->data->window.close();
+                break;
+            case sf::Keyboard::P:
+                this->TogglePause();
+                break;
             default:
                 break;
         } 

@@ -38,6 +38,43 @@ namespace GameOfLife {
         }
     }
 
+    int Board::GetNumOfLiveNeighbors(int row, int column){
+        std::vector<std::pair<int, int>> directions = {
+        {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
+        {0, 1},{1, -1}, {1, 0}, {1, 1}};
+        
+        int count = 0;
+        for (auto& dir : directions) {
+            int newX = row + dir.first;
+            int newY = column + dir.second;
+
+            if (row + dir.first >= 0 
+                    && row + dir.first < this->rows 
+                    && column + dir.second >= 0 
+                    && column + dir.second < this->columns) {
+                if(this->GetCellAt(row + dir.first, column + dir.second).IsAlive()) count++;
+            }
+        }
+        return count;
+    }
+
+    void Board::ProcessGeneration(){
+        for(int i=0; i<this->rows; i++){
+            for(int j=0; j<this->columns; j++){
+                Cell &cell = this->GetCellAt(i, j);
+                int liveNeighbors = this->GetNumOfLiveNeighbors(i, j);
+                if(cell.IsAlive()){
+                    if(liveNeighbors<2) cell.SetCellState(Cell::ALIVE_TO_DEAD);
+                    else if(liveNeighbors>3) cell.SetCellState(Cell::ALIVE_TO_DEAD);
+                } else if (liveNeighbors == 3){
+                    cell.SetCellState(Cell::DEAD_TO_ALIVE);
+                }
+            }
+        }
+
+        this->Update();
+    }
+
     void Board::ToggleCellAt(sf::Vector2f mousePos){
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
