@@ -7,6 +7,7 @@ find_package(SFML COMPONENTS window audio graphics network)
 
 file(GLOB SOURCE_FILES 
     "src/*.cpp"
+    "src/managers/*.cpp"
     "src/machine/*.cpp"
     "src/models/*.cpp"
     "src/states/*.cpp"
