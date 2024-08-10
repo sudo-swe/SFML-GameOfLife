@@ -6,6 +6,11 @@
 #define GAME_TITLE "Conway's Game Of Life"
 
 #define PATH_MOULDY_FONT "../assets/fonts/MouldyCheeseRegular.ttf"
+
+#define GAMESTATE_BACKGROUND_COLOR sf::Color::Black
+#define GAMESTATE_TEXT_NORMAL_COLOR sf::Color::White
+#define GAMESTATE_TEXT_ACTIVE_COLOR sf::Color::Red
+
 #define PATH_SPLASH_BACKGROUND "../assets/res/SplashBackground.png"
 #define SPLASHSTATE_DELAY_SECONDS 1.0f
 
@@ -19,5 +24,5 @@
 #define CELL_HEIGHT (SCREEN_HEIGHT-(2*BOARD_MARGIN))/BOARD_COLUMNS
 #define CELL_OUTLINE_THICKNESS 1.0f
 #define CELL_ALIVE_FILL_COLOR sf::Color::Green
-#define CELL_DEAD_FILL_COLOR sf::Color::White
-#define CELL_OUTLINE_COLOR sf::Color::Black
+#define CELL_DEAD_FILL_COLOR sf::Color::Black
+#define CELL_OUTLINE_COLOR sf::Color::White

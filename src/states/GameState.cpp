@@ -14,7 +14,7 @@ namespace GameOfLife {
         this->data->assets.LoadFont("Mouldy Font", PATH_MOULDY_FONT);
 
         this->generationsText.setFont(this->data->assets.GetFont("Mouldy Font"));
-        this->generationsText.setFillColor(sf::Color::Black);
+        this->generationsText.setFillColor(GAMESTATE_TEXT_NORMAL_COLOR);
         this->generationsText.setCharacterSize(20);
         this->generationsText.setString("Generations #");
         this->generationsText.setPosition(
@@ -23,12 +23,12 @@ namespace GameOfLife {
                 );
 
         this->pausedText.setFont(this->data->assets.GetFont("Mouldy Font"));
-        this->pausedText.setFillColor(sf::Color::Red);
+        this->paused ? this->pausedText.setFillColor(GAMESTATE_TEXT_ACTIVE_COLOR) : this->pausedText.setFillColor(GAMESTATE_TEXT_NORMAL_COLOR);
         this->pausedText.setCharacterSize(20);
         this->pausedText.setString("(P)ause");
         this->pausedText.setPosition(
-                SCREEN_WIDTH - BOARD_MARGIN - this->pausedText.getGlobalBounds().width,
-                BOARD_MARGIN - this->pausedText.getGlobalBounds().height - 10
+                SCREEN_WIDTH-BOARD_MARGIN-this->pausedText.getGlobalBounds().width,
+                BOARD_MARGIN-this->pausedText.getGlobalBounds().height-10
                 );
     }
 
@@ -66,12 +66,12 @@ namespace GameOfLife {
 
     void GameState::TogglePause(){ 
         this->paused = !this->paused;
-        if(this->paused) this->pausedText.setFillColor(sf::Color::Red);
-        else this->pausedText.setFillColor(sf::Color::Black);
+        if(this->paused) this->pausedText.setFillColor(GAMESTATE_TEXT_ACTIVE_COLOR);
+        else this->pausedText.setFillColor(GAMESTATE_TEXT_NORMAL_COLOR);
     }
 
     void GameState::Draw(float dt){
-        this->data->window.clear(sf::Color::White);
+        this->data->window.clear(GAMESTATE_BACKGROUND_COLOR);
         this->DrawBoard();
         this->data->window.draw(this->generationsText);
         this->data->window.draw(this->pausedText);
