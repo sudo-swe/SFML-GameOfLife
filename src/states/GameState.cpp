@@ -94,7 +94,7 @@ namespace GameOfLife {
     void GameState::HandleMouseInput(sf::Mouse::Button button){
         switch (button) {
             case sf::Mouse::Left:
-                {
+                if(this->paused){
                     sf::Vector2i mousePos = sf::Mouse::getPosition(this->data->window);
                     sf::Vector2f mousePosF = this->data->window.mapPixelToCoords(mousePos);
                     this->data->board.ToggleCellAt(mousePosF);
