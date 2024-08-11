@@ -2,6 +2,7 @@
 
 #include "models/Game.hpp"
 #include <SFML/Graphics/Text.hpp>
+
 namespace GameOfLife {
     class GameState : public State {
         public: 
@@ -26,5 +27,6 @@ namespace GameOfLife {
             void HandleMouseInput(sf::Mouse::Button button);
             void DrawBoard();
             void TogglePause();
+            void PrintBoard();
     };
 }

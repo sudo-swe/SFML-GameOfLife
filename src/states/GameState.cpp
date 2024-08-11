@@ -4,7 +4,10 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <fstream>
+#include <iostream>
 #include <sstream>
+#include <string>
 
 namespace GameOfLife {
     GameState::GameState(GameDataRef data) :
@@ -58,6 +61,7 @@ namespace GameOfLife {
            this->clock.restart();
            this->data->board.ProcessGeneration();
            this->generations++;
+
            std::ostringstream oss;
            oss << "Generations #" << this->generations;
            this->generationsText.setString(oss.str());
@@ -86,6 +90,8 @@ namespace GameOfLife {
             case sf::Keyboard::P:
                 this->TogglePause();
                 break;
+            case sf::Keyboard::S:
+                if(this->paused) this->PrintBoard();
             default:
                 break;
         } 
@@ -115,6 +121,25 @@ namespace GameOfLife {
                 cell.setPosition(BOARD_MARGIN + j * CELL_WIDTH, BOARD_MARGIN + i * CELL_HEIGHT);
                 this->data->window.draw(cell);
             }
+        }
+    }
+
+    void GameState::PrintBoard(){
+        int rows = this->data->board.GetRows();
+        int columns = this->data->board.GetColumns();
+        std::string res = "";
+
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                this->data->board.GetCellAt(i, j).IsAlive() ? res += "." : res += "*";
+            }
+            res += "\n";
+        }
+        
+        std::ofstream file(PATH_PRESET_GLIDER_GUN);
+        if(file.is_open()){
+            file << res;
+            file.close();
         }
     }
 }
