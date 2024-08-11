@@ -5,6 +5,8 @@
 
 #define GAME_TITLE "Conway's Game Of Life"
 
+#define PATH_PRESET_GLIDER_GUN "../assets/presets/GliderGun.txt"
+
 #define PATH_MOULDY_FONT "../assets/fonts/MouldyCheeseRegular.ttf"
 
 #define GAMESTATE_BACKGROUND_COLOR sf::Color::Black
@@ -18,7 +20,7 @@
 #define BOARD_COLUMNS 50
 #define BOARD_MARGIN 50.0f
 
-#define GENERATION_DELAY_SECONDS 0.2f
+#define GENERATION_DELAY_SECONDS 0.005f
 
 #define CELL_WIDTH (SCREEN_WIDTH-(2*BOARD_MARGIN))/BOARD_ROWS
 #define CELL_HEIGHT (SCREEN_HEIGHT-(2*BOARD_MARGIN))/BOARD_COLUMNS

@@ -1,12 +1,13 @@
 #pragma once
 
 #include "models/Cell.hpp"
+#include <string>
 #include <vector>
 
 namespace GameOfLife{
     class Board{
         public:
-            Board(int rows, int columns);
+            Board(int rows, int columns, std::string preset="");
 
             int GetRows();
             int GetColumns();
