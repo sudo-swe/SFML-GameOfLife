@@ -1,6 +1,8 @@
 #include "states/GameState.hpp"
+#include "machine/StateMachine.hpp"
 #include "models/Game.hpp"
 #include "DEFINITIONS.hpp"
+#include "states/MenuState.hpp"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -32,10 +34,6 @@ namespace GameOfLife {
                 SCREEN_WIDTH-BOARD_MARGIN-this->pausedText.getGlobalBounds().width,
                 BOARD_MARGIN-this->pausedText.getGlobalBounds().height-10
                 );
-
-        if(!this->data->board.LoadPresetBoard(PATH_PRESET_SYMMETRY_ACORN)){
-            this->data->board.LoadRandomBoard();
-        }
     }
 
     void GameState::HandleInput(){
@@ -55,6 +53,8 @@ namespace GameOfLife {
                         case sf::Keyboard::P:
                             this->paused = !this->paused;
                             break;
+                        case sf::Keyboard::M:
+                            this->data->machine.AddState(StateRef(new MenuState(data)));
                         default:
                             break;
                     } 

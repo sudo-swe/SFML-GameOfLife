@@ -95,6 +95,7 @@ namespace GameOfLife {
     }
 
     void Board::LoadRandomBoard(){
+        this->generations = 0;
         srand(static_cast<unsigned>(time(0)));
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
@@ -105,6 +106,7 @@ namespace GameOfLife {
     } 
 
     bool Board::LoadPresetBoard(std::string presetPath){
+        this->generations = 0;
         std::ifstream inFile(presetPath);
         if(inFile.is_open()){
             char ch; int i=0, j=0;
@@ -120,6 +122,7 @@ namespace GameOfLife {
     }
 
     void Board::LoadBlankBoard(){
+        this->generations = 0;
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
                 this->grid[i][j] = Cell(i, j);

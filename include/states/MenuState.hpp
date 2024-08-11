@@ -18,5 +18,7 @@ namespace GameOfLife{
         private:
             GameDataRef data;
             sf::Sprite background;
+
+            void StartGame();
     };
 }
