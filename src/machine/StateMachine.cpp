@@ -16,16 +16,12 @@ namespace GameOfLife {
     void StateMachine::ProcessStateChanges(){
         if(this->isRemoving && !this->states.empty()){
             this->states.pop();
-
-            if(!this->states.empty()) this->states.top()->Resume();
-
             this->isRemoving = false;
         }
 
         if(this->isAdding){
             if(!this->states.empty()){
                 if(this->isReplacing) this->states.pop();
-                else this->states.top()->Resume();
             }
             this->states.push(std::move(this->state));
             this->states.top()->Init();

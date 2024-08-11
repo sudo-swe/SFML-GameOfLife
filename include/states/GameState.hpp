@@ -16,17 +16,12 @@ namespace GameOfLife {
         private:
             GameDataRef data;
             sf::Clock clock;
+            bool paused = true;
+
             sf::Text generationsText;
             sf::Text pausedText;
 
-            bool paused = true;
-            long generations = 0;
-
-
-            void HandleKeyboardInput(sf::Keyboard::Key key);
-            void HandleMouseInput(sf::Mouse::Button button);
+            void UpdateText();
             void DrawBoard();
-            void TogglePause();
-            void PrintBoard();
     };
 }

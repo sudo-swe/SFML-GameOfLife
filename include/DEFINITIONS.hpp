@@ -6,6 +6,8 @@
 #define GAME_TITLE "Conway's Game Of Life"
 
 #define PATH_PRESET_GLIDER_GUN "../assets/presets/GliderGun.txt"
+#define PATH_PRESET_SYMMETRY_ACORN "../assets/presets/SymmetryAcorn.txt"
+#define PATH_PRESET_B_HEPTOMINO "../assets/presets/B-Heptomino.txt"
 
 #define PATH_MOULDY_FONT "../assets/fonts/MouldyCheeseRegular.ttf"
 

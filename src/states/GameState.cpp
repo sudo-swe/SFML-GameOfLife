@@ -4,7 +4,6 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -33,6 +32,10 @@ namespace GameOfLife {
                 SCREEN_WIDTH-BOARD_MARGIN-this->pausedText.getGlobalBounds().width,
                 BOARD_MARGIN-this->pausedText.getGlobalBounds().height-10
                 );
+
+        if(!this->data->board.LoadPresetBoard(PATH_PRESET_SYMMETRY_ACORN)){
+            this->data->board.LoadRandomBoard();
+        }
     }
 
     void GameState::HandleInput(){
@@ -43,12 +46,34 @@ namespace GameOfLife {
                 case sf::Event::Closed:
                     this->data->window.close();
                     break;
+
                 case sf::Event::KeyPressed:
-                    this->HandleKeyboardInput(event.key.code);
+                    switch (event.key.code) {
+                        case sf::Keyboard::Q:
+                            this->data->window.close();
+                            break;
+                        case sf::Keyboard::P:
+                            this->paused = !this->paused;
+                            break;
+                        default:
+                            break;
+                    } 
                     break;
+
                 case sf::Event::MouseButtonPressed:
-                    this->HandleMouseInput(event.mouseButton.button);
+                    switch (event.mouseButton.button) {
+                        case sf::Mouse::Left:
+                            if(this->paused){
+                                sf::Vector2i mousePos = sf::Mouse::getPosition(this->data->window);
+                                sf::Vector2f mousePosF = this->data->window.mapPixelToCoords(mousePos);
+                                this->data->board.ToggleCellAt(mousePosF);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                     break;
+
                 default:
                     break;
             }
@@ -56,22 +81,23 @@ namespace GameOfLife {
     }
 
     void GameState::Update(float dt){
-        if(this->paused) this->data->board.Update();
-        else if (this->clock.getElapsedTime().asSeconds() > GENERATION_DELAY_SECONDS){
-           this->clock.restart();
-           this->data->board.ProcessGeneration();
-           this->generations++;
-
-           std::ostringstream oss;
-           oss << "Generations #" << this->generations;
-           this->generationsText.setString(oss.str());
+        if (!this->paused && this->clock.getElapsedTime().asSeconds() > GENERATION_DELAY_SECONDS) {
+            this->clock.restart();
+            this->data->board.ProcessGeneration();
         }
+
+        this->data->board.Update();
+        this->UpdateText();
     }
 
-    void GameState::TogglePause(){ 
-        this->paused = !this->paused;
-        if(this->paused) this->pausedText.setFillColor(GAMESTATE_TEXT_ACTIVE_COLOR);
-        else this->pausedText.setFillColor(GAMESTATE_TEXT_NORMAL_COLOR);
+    void GameState::UpdateText(){
+        this->paused ? 
+            this->pausedText.setFillColor(GAMESTATE_TEXT_ACTIVE_COLOR) : 
+            this->pausedText.setFillColor(GAMESTATE_TEXT_NORMAL_COLOR);
+
+        std::ostringstream oss;
+        oss << "Generations #" << this->data->board.GetGenerations();
+        this->generationsText.setString(oss.str());
     }
 
     void GameState::Draw(float dt){
@@ -80,35 +106,6 @@ namespace GameOfLife {
         this->data->window.draw(this->generationsText);
         this->data->window.draw(this->pausedText);
         this->data->window.display();
-    }
-
-    void GameState::HandleKeyboardInput(sf::Keyboard::Key key){
-        switch (key) {
-            case sf::Keyboard::Q:
-                this->data->window.close();
-                break;
-            case sf::Keyboard::P:
-                this->TogglePause();
-                break;
-            case sf::Keyboard::S:
-                if(this->paused) this->PrintBoard();
-            default:
-                break;
-        } 
-    }
-
-    void GameState::HandleMouseInput(sf::Mouse::Button button){
-        switch (button) {
-            case sf::Mouse::Left:
-                if(this->paused){
-                    sf::Vector2i mousePos = sf::Mouse::getPosition(this->data->window);
-                    sf::Vector2f mousePosF = this->data->window.mapPixelToCoords(mousePos);
-                    this->data->board.ToggleCellAt(mousePosF);
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     void GameState::DrawBoard(){
@@ -121,25 +118,6 @@ namespace GameOfLife {
                 cell.setPosition(BOARD_MARGIN + j * CELL_WIDTH, BOARD_MARGIN + i * CELL_HEIGHT);
                 this->data->window.draw(cell);
             }
-        }
-    }
-
-    void GameState::PrintBoard(){
-        int rows = this->data->board.GetRows();
-        int columns = this->data->board.GetColumns();
-        std::string res = "";
-
-        for(int i=0; i<rows; i++){
-            for(int j=0; j<columns; j++){
-                this->data->board.GetCellAt(i, j).IsAlive() ? res += "." : res += "*";
-            }
-            res += "\n";
-        }
-        
-        std::ofstream file(PATH_PRESET_GLIDER_GUN);
-        if(file.is_open()){
-            file << res;
-            file.close();
         }
     }
 }
