@@ -11,6 +11,8 @@
 
 #define PATH_MOULDY_FONT "../assets/fonts/MouldyCheeseRegular.ttf"
 
+#define PATH_MENUSTATE_BACKGROUND "../assets/res/MenuBackground.png"
+
 #define GAMESTATE_BACKGROUND_COLOR sf::Color::Black
 #define GAMESTATE_TEXT_NORMAL_COLOR sf::Color::White
 #define GAMESTATE_TEXT_ACTIVE_COLOR sf::Color::Red

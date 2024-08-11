@@ -2,7 +2,7 @@
 #include "DEFINITIONS.hpp"
 #include "machine/StateMachine.hpp"
 #include "models/Game.hpp"
-#include "states/GameState.hpp"
+#include "states/MenuState.hpp"
 #include <ctime>
 
 namespace GameOfLife {
@@ -41,7 +41,7 @@ namespace GameOfLife {
 
     void SplashState::Update(float dt){
         if(this->clock.getElapsedTime().asSeconds() > SPLASHSTATE_DELAY_SECONDS){
-            this->data->machine.AddState(StateRef(new GameState(data)));
+            this->data->machine.AddState(StateRef(new MenuState(data)));
         }
     }
 
