@@ -19,6 +19,7 @@ namespace GameOfLife{
             void ProcessGeneration();
 
             void LoadRandomBoard();
+            void LoadBlankBoard();
             bool LoadPresetBoard(std::string presetPath);
             void ToggleCellAt(sf::Vector2f mousePos);
 
