@@ -1,3 +1,4 @@
+#include "DEFINITIONS.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Color.hpp>
 
@@ -27,24 +28,31 @@ namespace GameOfLife {
             int row, column;
             CellState state;
             sf::RectangleShape drawableCell;
-            sf::Color colors[5] = {
-                sf::Color::Red,
-                sf::Color::Green,
-                sf::Color::Blue,
-                sf::Color::Yellow,
-                sf::Color::Magenta
+            sf::Color colors[6] = {
+                CELL_ALIVE_RANDOM_COLOR_1,
+                CELL_ALIVE_RANDOM_COLOR_2,
+                CELL_ALIVE_RANDOM_COLOR_3,
+                CELL_ALIVE_RANDOM_COLOR_4,
+                CELL_ALIVE_RANDOM_COLOR_5,
+                CELL_ALIVE_RANDOM_COLOR_6
             };
-            sf::Color shades[5] = {
-                sf::Color(150, 0, 0),
-                sf::Color(125, 0, 0),
-                sf::Color(100, 0, 0),
-                sf::Color(50, 0, 0),
-                sf::Color(0, 0, 0)
+            sf::Color shades[11] = {
+                CELL_DEAD_TRAIL_1,
+                CELL_DEAD_TRAIL_2,
+                CELL_DEAD_TRAIL_3,
+                CELL_DEAD_TRAIL_4,
+                CELL_DEAD_TRAIL_5,
+                CELL_DEAD_TRAIL_6,
+                CELL_DEAD_TRAIL_7,
+                CELL_DEAD_TRAIL_8,
+                CELL_DEAD_TRAIL_9,
+                CELL_DEAD_TRAIL_10,
+                CELL_DEAD_TRAIL_11
             };
-            int deadShade = 4;
+            int deadShade = sizeof(this->shades)-1;
 
             void UpdateState();
             void UpdateColor(bool randomColors, bool trailColors);
-            void SetRandomColor();
+            sf::Color GetRandomColor();
     };
 }

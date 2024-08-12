@@ -56,6 +56,9 @@ namespace GameOfLife {
                         case sf::Keyboard::C:
                             this->randomColors = !this->randomColors;
                             break;
+                        case sf::Keyboard::T:
+                            this->trailColors = !this->trailColors;
+                            break;
                         case sf::Keyboard::M:
                             this->data->machine.AddState(StateRef(new MenuState(data)));
                         default:

@@ -43,21 +43,22 @@ namespace GameOfLife {
         } 
         else{
             this->state = DEAD;
-            if(this->deadShade < 4) this->deadShade++;
+            if(this->deadShade < sizeof(this->shades)-1) this->deadShade++;
         } 
     }
 
     void Cell::UpdateColor(bool randomColors, bool trailColors){
         if(this->state == ALIVE){
-            if(randomColors) this->SetRandomColor();
+            if(randomColors) this->drawableCell.setFillColor(this->GetRandomColor());
             else this->drawableCell.setFillColor(CELL_ALIVE_FILL_COLOR);
         } else if (this->state == DEAD){
-            this->drawableCell.setFillColor(this->shades[this->deadShade]);
+            if(trailColors) this->drawableCell.setFillColor(this->shades[this->deadShade]);
+            else this->drawableCell.setFillColor(CELL_DEAD_FILL_COLOR);
         }
     }
 
-    void Cell::SetRandomColor(){
+    sf::Color Cell::GetRandomColor(){
         int randomIndex = std::rand() % (sizeof(this->colors) / sizeof(this->colors[0]));
-        this->drawableCell.setFillColor(this->colors[randomIndex]);
+        return this->colors[randomIndex];
     }
 }
