@@ -8,7 +8,7 @@ namespace GameOfLife {
         this->drawableCell.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
         this->drawableCell.setOutlineThickness(CELL_OUTLINE_THICKNESS);
         this->drawableCell.setOutlineColor(CELL_OUTLINE_COLOR);
-        this->UpdateColor();
+        this->UpdateColor(false);
     }
 
     void Cell::SetCellState(CellState state){
@@ -31,9 +31,9 @@ namespace GameOfLife {
         return this->drawableCell;
     }
 
-    void Cell::Update(){
+    void Cell::Update(bool randomColors){
         this->UpdateState();
-        this->UpdateColor();
+        this->UpdateColor(randomColors);
     }
 
     void Cell::UpdateState(){
@@ -41,11 +41,17 @@ namespace GameOfLife {
         else this->state = DEAD;
     }
 
-    void Cell::UpdateColor(){
+    void Cell::UpdateColor(bool randomColors){
         if(this->state == ALIVE){
-            this->drawableCell.setFillColor(CELL_ALIVE_FILL_COLOR);
+            if(randomColors) this->SetRandomColor();
+            else this->drawableCell.setFillColor(CELL_ALIVE_FILL_COLOR);
         } else if (this->state == DEAD){
             this->drawableCell.setFillColor(CELL_DEAD_FILL_COLOR);
         }
+    }
+
+    void Cell::SetRandomColor(){
+        int randomIndex = std::rand() % (sizeof(this->colors) / sizeof(this->colors[0]));
+        this->drawableCell.setFillColor(this->colors[randomIndex]);
     }
 }

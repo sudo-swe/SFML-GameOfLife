@@ -15,7 +15,7 @@ namespace GameOfLife{
             long GetGenerations();
             Cell &GetCellAt(int row, int column);
 
-            void Update();
+            void Update(bool randomColors);
             void ProcessGeneration();
 
             void LoadRandomBoard();

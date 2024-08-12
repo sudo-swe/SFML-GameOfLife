@@ -53,6 +53,9 @@ namespace GameOfLife {
                         case sf::Keyboard::P:
                             this->paused = !this->paused;
                             break;
+                        case sf::Keyboard::C:
+                            this->randomColors = !this->randomColors;
+                            break;
                         case sf::Keyboard::M:
                             this->data->machine.AddState(StateRef(new MenuState(data)));
                         default:
@@ -86,7 +89,7 @@ namespace GameOfLife {
             this->data->board.ProcessGeneration();
         }
 
-        this->data->board.Update();
+        this->data->board.Update(this->randomColors);
         this->UpdateText();
     }
 

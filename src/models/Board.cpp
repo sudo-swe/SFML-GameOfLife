@@ -12,6 +12,7 @@ namespace GameOfLife {
     Board::Board(int rows, int columns)
         : rows(rows) , columns(columns)
     {
+        std::srand(static_cast<unsigned>(std::time(nullptr)));
         this->grid.resize(this->rows);
         for(int i=0; i<this->rows; i++) this->grid[i].resize(this->columns);
 
@@ -33,10 +34,10 @@ namespace GameOfLife {
         return this->grid[row][column];
     }
 
-    void Board::Update(){
+    void Board::Update(bool randomColors){
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
-                this->GetCellAt(i, j).Update();
+                this->GetCellAt(i, j).Update(randomColors);
             }
         }
     }
@@ -96,7 +97,6 @@ namespace GameOfLife {
 
     void Board::LoadRandomBoard(){
         this->generations = 0;
-        srand(static_cast<unsigned>(time(0)));
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
                 if(rand()%2==0) this->grid[i][j] = Cell(i, j);

@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 #pragma once
 
@@ -19,15 +20,23 @@ namespace GameOfLife {
             bool IsAlive();
             bool WillDie();
             bool WillLive();
-            void Update();
+            void Update(bool randomColors);
             sf::RectangleShape &GetDrawableCell();
 
         private: 
             int row, column;
             CellState state;
             sf::RectangleShape drawableCell;
+            sf::Color colors[5] = {
+                sf::Color::Red,
+                sf::Color::Green,
+                sf::Color::Blue,
+                sf::Color::Yellow,
+                sf::Color::Magenta
+            };
 
             void UpdateState();
-            void UpdateColor();
+            void UpdateColor(bool randomColors);
+            void SetRandomColor();
     };
 }

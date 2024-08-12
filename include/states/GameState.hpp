@@ -17,6 +17,7 @@ namespace GameOfLife {
             GameDataRef data;
             sf::Clock clock;
             bool paused = true;
+            bool randomColors = false;
 
             sf::Text generationsText;
             sf::Text pausedText;
