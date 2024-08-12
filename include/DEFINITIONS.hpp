@@ -51,4 +51,4 @@
 #define CELL_DEAD_TRAIL_9 sf::Color(30, 0, 0)
 #define CELL_DEAD_TRAIL_10 sf::Color(15, 0, 0)
 #define CELL_DEAD_TRAIL_11 sf::Color::Black
-#define CELL_OUTLINE_COLOR sf::Color::White
+#define CELL_OUTLINE_COLOR sf::Color::Transparent
