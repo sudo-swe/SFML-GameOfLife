@@ -61,6 +61,20 @@ namespace GameOfLife {
                             break;
                         case sf::Keyboard::M:
                             this->data->machine.AddState(StateRef(new MenuState(data)));
+                        case sf::Keyboard::Left: 
+                            {
+                                float min = MIN_GENERATOIN_DELAY_SECONDS;
+                                if(this->generationDelay < min)
+                                    this->generationDelay += GENERATION_DELAY_STEP_SECONDS;
+                            }
+                            break;
+                        case sf::Keyboard::Right:
+                            {
+                                float max = MAX_GENERATION_DELAY_SECONDS;
+                                if(this->generationDelay > max)
+                                    this->generationDelay -= GENERATION_DELAY_STEP_SECONDS;
+                            }
+                            break;
                         default:
                             break;
                     } 
@@ -87,7 +101,7 @@ namespace GameOfLife {
     }
 
     void GameState::Update(float dt){
-        if (!this->paused && this->clock.getElapsedTime().asSeconds() > GENERATION_DELAY_SECONDS) {
+        if (!this->paused && this->clock.getElapsedTime().asSeconds() > this->generationDelay) {
             this->clock.restart();
             this->data->board.ProcessGeneration();
             this->data->board.Update(this->randomColors, this->trailColors);
