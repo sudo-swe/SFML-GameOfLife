@@ -18,6 +18,7 @@ namespace GameOfLife {
             sf::Clock clock;
             bool paused = true;
             bool randomColors = false;
+            bool trailColors = true;
 
             sf::Text generationsText;
             sf::Text pausedText;

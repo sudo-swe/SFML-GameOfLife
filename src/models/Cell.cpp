@@ -8,7 +8,7 @@ namespace GameOfLife {
         this->drawableCell.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
         this->drawableCell.setOutlineThickness(CELL_OUTLINE_THICKNESS);
         this->drawableCell.setOutlineColor(CELL_OUTLINE_COLOR);
-        this->UpdateColor(false);
+        this->UpdateColor(false, false);
     }
 
     void Cell::SetCellState(CellState state){
@@ -31,22 +31,28 @@ namespace GameOfLife {
         return this->drawableCell;
     }
 
-    void Cell::Update(bool randomColors){
+    void Cell::Update(bool randomColors, bool trailColors){
         this->UpdateState();
-        this->UpdateColor(randomColors);
+        this->UpdateColor(randomColors, trailColors);
     }
 
     void Cell::UpdateState(){
-        if(this->state == ALIVE || this->state == DEAD_TO_ALIVE) this->state = ALIVE;
-        else this->state = DEAD;
+        if(this->state == ALIVE || this->state == DEAD_TO_ALIVE){
+            this->state = ALIVE;
+            this->deadShade = 0;
+        } 
+        else{
+            this->state = DEAD;
+            if(this->deadShade < 4) this->deadShade++;
+        } 
     }
 
-    void Cell::UpdateColor(bool randomColors){
+    void Cell::UpdateColor(bool randomColors, bool trailColors){
         if(this->state == ALIVE){
             if(randomColors) this->SetRandomColor();
             else this->drawableCell.setFillColor(CELL_ALIVE_FILL_COLOR);
         } else if (this->state == DEAD){
-            this->drawableCell.setFillColor(CELL_DEAD_FILL_COLOR);
+            this->drawableCell.setFillColor(this->shades[this->deadShade]);
         }
     }
 

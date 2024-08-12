@@ -34,10 +34,10 @@ namespace GameOfLife {
         return this->grid[row][column];
     }
 
-    void Board::Update(bool randomColors){
+    void Board::Update(bool randomColors, bool trailColors){
         for(int i=0; i<this->rows; i++){
             for(int j=0; j<this->columns; j++){
-                this->GetCellAt(i, j).Update(randomColors);
+                this->GetCellAt(i, j).Update(randomColors, trailColors);
             }
         }
     }

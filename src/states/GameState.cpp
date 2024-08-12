@@ -87,9 +87,12 @@ namespace GameOfLife {
         if (!this->paused && this->clock.getElapsedTime().asSeconds() > GENERATION_DELAY_SECONDS) {
             this->clock.restart();
             this->data->board.ProcessGeneration();
+            this->data->board.Update(this->randomColors, this->trailColors);
+        }
+        if(this->paused) {
+            this->data->board.Update(this->randomColors, this->trailColors);
         }
 
-        this->data->board.Update(this->randomColors);
         this->UpdateText();
     }
 

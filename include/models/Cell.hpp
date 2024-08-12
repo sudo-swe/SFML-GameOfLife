@@ -20,7 +20,7 @@ namespace GameOfLife {
             bool IsAlive();
             bool WillDie();
             bool WillLive();
-            void Update(bool randomColors);
+            void Update(bool randomColors, bool trailColors);
             sf::RectangleShape &GetDrawableCell();
 
         private: 
@@ -34,9 +34,17 @@ namespace GameOfLife {
                 sf::Color::Yellow,
                 sf::Color::Magenta
             };
+            sf::Color shades[5] = {
+                sf::Color(150, 0, 0),
+                sf::Color(125, 0, 0),
+                sf::Color(100, 0, 0),
+                sf::Color(50, 0, 0),
+                sf::Color(0, 0, 0)
+            };
+            int deadShade = 4;
 
             void UpdateState();
-            void UpdateColor(bool randomColors);
+            void UpdateColor(bool randomColors, bool trailColors);
             void SetRandomColor();
     };
 }
